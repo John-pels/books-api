@@ -1,13 +1,12 @@
-const express = require('express');
+const express = require("express");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    res.send("Welcome to My API!")
+  res.send("Welcome to My Express API!");
 });
 
-
 app.listen(port, () => {
-    console.log(`Running on Port ${port}`)
+  console.log(`Running on Port ${port}`);
 });
