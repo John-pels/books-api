@@ -18,5 +18,8 @@
   "homepage": "https://github.com/John-pels/books-api#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0"
   }
 }
