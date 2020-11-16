@@ -1,23 +1,32 @@
 const express = require("express");
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const app = express();
-const db = mongoose.connect('mongodb://localhost/bookAPI')
+
+console.log("This is a test");
+if (process.env.ENV === "Test") {
+  const db = mongoose.connect("mongodb://localhost/bookAPI_Test");
+} else {
+  console.log("This is for real");
+  const db = mongoose.connect("mongodb://localhost/bookAPI-prod");
+}
+
 const port = process.env.PORT || 3000;
-const Book = require('./models/bookModel')
-const bookRouter = require('./routes/bookRouter')(Book);
+const Book = require("./models/bookModel");
+const bookRouter = require("./routes/bookRouter")(Book);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-app.use('/api', bookRouter);
+app.use("/api", bookRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to My Express API!");
 });
 
-app.listen(port, () => {
+ app.server = app.listen(port, () => {
   console.log(`Running on Port ${port}`);
 });
+
+module.exports = app;
