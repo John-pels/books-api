@@ -1,6 +1,6 @@
 const express = require('express')
 
-function routes() {
+function routes(Book) {
 
     const bookRouter = express.Router();
   //Get or Post books
