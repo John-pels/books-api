@@ -1,7 +1,7 @@
-var express = require('express');
+const express = require('express');
 
-var app = express();
-var port = process.env.PORT || 3000;
+const app = express();
+const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
     res.send("Welcome to My API!")
@@ -9,5 +9,5 @@ app.get("/", (req, res) => {
 
 
 app.listen(port, () => {
-    console.log('Running on Port ' + port)
+    console.log(`Running on Port ${port}`)
 });
