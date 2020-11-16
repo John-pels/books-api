@@ -1,16 +1,12 @@
 const express = require("express");
-const booksController = require('../controllers/booksController');
-
+const booksController = require("../controllers/booksController");
 
 function routes(Book) {
-    const bookRouter = express.Router();
-    const controller = booksController(Book);
+  const bookRouter = express.Router();
+  const controller = booksController(Book);
   //Get or Post books
 
-  bookRouter
-    .route("/books")
-    .post(controller.post)
-    .get(controller.get);
+  bookRouter.route("/books").post(controller.post).get(controller.get);
 
   //Get a Book by ID
   bookRouter.use("/books/:bookId", (req, res, next) => {
@@ -27,7 +23,13 @@ function routes(Book) {
   });
   bookRouter
     .route("/books/:bookId")
-    .get((req, res) => res.json(req.book))
+    .get((req, res) => {
+      const returnBook = req.book.toJSON();
+        returnBook.links = {};
+        const genre = req.book.genre.replace(' ', '%20');
+      returnBook.links.FilterByThisGenre = `http://${req.headers.host}/api/books/?genre=${genre}`;
+      res.json(returnBook);
+    })
     .put(controller.put)
     .patch(controller.patch)
     .delete(controller.deleteBook);
