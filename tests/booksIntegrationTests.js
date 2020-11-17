@@ -29,9 +29,9 @@ describe("Book CRUD Test", () => {
     Book.deleteMany({}).exec();
     done();
   });
-    
-    after((done) => {
-        mongoose.connection.close();
-        app.server.close(done());
-    });
+
+  after((done) => {
+    mongoose.connection.close();
+    app.server.close(done());
+  });
 });

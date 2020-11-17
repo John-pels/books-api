@@ -33,7 +33,8 @@ function booksController(Book) {
   }
 
   function put(req, res) {
-    const { book } = req;
+      const { book } = req;
+      
     book.title = req.body.title;
     book.author = req.body.author;
     book.genre = req.body.genre;
